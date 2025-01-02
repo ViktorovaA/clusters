@@ -1,0 +1,6 @@
+spring:
+  application:
+  name: clusterBoundaries
+
+server:
+  port: 8081
