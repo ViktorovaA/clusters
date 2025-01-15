@@ -12,4 +12,5 @@ interface ClusterService {
     fun createClusterBoundariesAll(): List<Boundary>
     fun getClusterBoundariesAll(): List<Boundary>
     fun getClusterBoundariesByClusterId(id: Int): List<Boundary>
+    fun clearBoundaries() // Добавляем новый метод
 }

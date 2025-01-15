@@ -25,13 +25,14 @@ fun getNearestPoints(
     pointMetadataRepository: PointMetadataRepository,
 ): Map<Point, PointVicinity> {
     val pointsVicinity: MutableMap<Point, PointVicinity> = mutableMapOf()
+    pointMetadataRepository.clear()
     for (i in points) {
         val pv = PointVicinity()
         for (j in points) {
             if (i.id == j.id) continue
             if (dist(i, j) >= settings.maxDistance) continue
             val quadrant = "${sg(j.x - i.x)}${sg(j.y - i.y)}".toInt(2)
-            println("$i, $j, $quadrant")
+//            println("$i, $j, $quadrant")
             pv.quadrants[quadrant].add(j)
         }
         pointsVicinity[i] = pv
@@ -41,6 +42,7 @@ fun getNearestPoints(
     }
     return pointsVicinity
 }
+
 
 fun addPointRecursively(cluster: MutableSet<Point>, pointsVicinity: MutableMap<Point, PointVicinity>, curPoint: Point) {
     cluster.add(curPoint)

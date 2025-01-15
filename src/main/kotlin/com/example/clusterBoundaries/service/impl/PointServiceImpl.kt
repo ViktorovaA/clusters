@@ -26,4 +26,8 @@ class PointServiceImpl(
         println("get points/get")
         return pointRepository.getAll().map { mapper.entityToResponse(it) }
     }
+
+    override fun deleteAll() {
+        pointRepository.clear()
+    }
 }

@@ -13,4 +13,8 @@ class PointMetadataRepository(
     fun markAsBoundary(pointId: Int) {
         pointMetadataMap[pointId] = true
     }
+
+    fun clear() {
+        pointMetadataMap.clear()
+    }
 }
