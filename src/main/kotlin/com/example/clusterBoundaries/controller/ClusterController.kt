@@ -1,6 +1,9 @@
+
 package com.example.clusterBoundaries.controller
 
 import com.example.clusterBoundaries.model.ClusteringSettings
+import com.example.clusterBoundaries.repository.entity.Boundary
+import com.example.clusterBoundaries.repository.entity.Cluster
 import com.example.clusterBoundaries.service.ClusterService
 import org.springframework.web.bind.annotation.*
 
@@ -9,24 +12,31 @@ import org.springframework.web.bind.annotation.*
 class ClusterController(
     val service: ClusterService,
 ) {
+    // Создать кластеры
     @PostMapping
-    fun create() = service.create()
+    fun create(): List<Cluster> = service.create()
 
+    // Получить все кластеры
     @GetMapping
-    fun get() = service.get()
+    fun get(): List<Cluster> = service.get()
 
+    // Установить настройки кластеризации
     @PostMapping("/settings")
-    fun setClusteringSettings(@RequestBody request: ClusteringSettings) = service.setClusteringSettings(request)
+    fun setClusteringSettings(@RequestBody request: ClusteringSettings): ClusteringSettings = service.setClusteringSettings(request)
 
+    // Получить настройки кластеризации
     @GetMapping("/settings")
-    fun getClusteringSettings() = service.getClusteringSettings()
+    fun getClusteringSettings(): ClusteringSettings = service.getClusteringSettings()
 
+    // Создать границы для всех кластеров
     @PostMapping("/boundaries")
-    fun createBoundariesAll() = service.createClusterBoundariesAll()
+    fun createBoundariesAll(): List<Boundary> {
+        // Очищаем границы перед их пересчетом
+        service.clearBoundaries()
+        return service.createClusterBoundariesAll()
+    }
 
-//    @PostMapping("/{cluster_id}/boundaries")
-//    fun createBoundariesById(@PathVariable("cluster_id") id: Int) = service.createClusterBoundariesById(id)
-//
-//    @GetMapping("/{cluster_id}/boundaries")
-//    fun getBoundariesById(@PathVariable("cluster_id") id: Int) = service.getClusterBoundariesById(id)
+    // Получить все границы
+    @GetMapping("/boundaries")
+    fun getBoundariesAll(): List<Boundary> = service.getClusterBoundariesAll()
 }

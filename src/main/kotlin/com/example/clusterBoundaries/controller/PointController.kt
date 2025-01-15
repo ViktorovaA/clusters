@@ -2,6 +2,7 @@ package com.example.clusterBoundaries.controller
 
 import com.example.clusterBoundaries.model.dto.request.PointRequest
 import com.example.clusterBoundaries.service.PointService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -18,6 +19,9 @@ class PointController(
 
     @GetMapping
     fun get() = service.get()
+
+    @DeleteMapping
+    fun deleteAll() = service.deleteAll()
 }
 
 

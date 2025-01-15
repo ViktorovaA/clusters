@@ -50,4 +50,8 @@ class ClusterServiceImpl(
     override fun getClusterBoundariesByClusterId(id: Int): List<Boundary> {
         return boundaryRepository.getByClusterId(id)
     }
+
+    override fun clearBoundaries() {
+        boundaryRepository.clear() // Очищаем границы
+    }
 }
